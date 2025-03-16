@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>domius</title>
+    <style>
+        /* Definindo o fundo com a nova imagem fornecida */
+        body {
+            background-color: #333;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 40px; /* Espaçamento para o rodapé */
+        }
+
+        /* Camada de sobreposição sem o desfoque */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.discordapp.com/attachments/1291075417683267715/1350945200112930866/EnAPH8.png?ex=67d89543&is=67d743c3&hm=46f51013a5464adb33422d784e97e3da03c89252f2c0f5afceb435cd0b811766&');
+            background-size: cover;
+            z-index: 0; /* Fica abaixo do conteúdo */
+        }
+
+        /* Camada de sobreposição para suavizar o fundo e melhorar a visibilidade do conteúdo */
+        .background-overlay {
+            background-color: rgba(0, 0, 0, 0.5); /* Sombreado suave */
+        }
+
+        /* Estilo do título com gradiente */
+        h1 {
+            font-size: 30px; /* Tamanho menor */
+            margin-bottom: 30px;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ff6ec7, #ff8a00);
+            -webkit-background-clip: text;
+            color: white; /* Alterando a cor do texto para branco */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: none;
+            z-index: 1; /* Fica acima da camada de fundo */
+        }
+
+        /* Estilo dos botões */
+        .buttons-container {
+            display: flex;
+            gap: 20px;
+            z-index: 1; /* Fica acima da camada de fundo */
+        }
+
+        .button {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Efeito de neve */
+        .snowflake {
+            position: absolute;
+            top: -10px; /* Inicia fora da tela */
+            color: #fff;
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+            animation-fill-mode: forwards;
+            opacity: 0; /* Inicialmente invisível */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10px); /* Começando fora da tela */
+                opacity: 1; /* Torna visível logo no início */
+            }
+            100% {
+                transform: translateY(100vh); /* Vai até o final da tela */
+                opacity: 0; /* Aqui a opacidade vai para 0, escondendo o floco ao atingir o final */
+            }
+        }
+
+        /* Ajustando a animação da neve para cair mais suavemente e sem travar */
+        .snowflake:nth-child(1) {
+            left: 10%;
+            animation-duration: 10s;
+            animation-delay: 0s;
+            font-size: 18px;
+        }
+        .snowflake:nth-child(2) {
+            left: 20%;
+            animation-duration: 12s;
+            animation-delay: 2s;
+            font-size: 22px;
+        }
+        .snowflake:nth-child(3) {
+            left: 30%;
+            animation-duration: 9s;
+            animation-delay: 1s;
+            font-size: 25px;
+        }
+        .snowflake:nth-child(4) {
+            left: 40%;
+            animation-duration: 14s;
+            animation-delay: 4s;
+            font-size: 20px;
+        }
+        .snowflake:nth-child(5) {
+            left: 50%;
+            animation-duration: 11s;
+            animation-delay: 3s;
+            font-size: 23px;
+        }
+        .snowflake:nth-child(6) {
+            left: 60%;
+            animation-duration: 13s;
+            animation-delay: 5s;
+            font-size: 19px;
+        }
+        .snowflake:nth-child(7) {
+            left: 70%;
+            animation-duration: 10s;
+            animation-delay: 1s;
+            font-size: 21px;
+        }
+        .snowflake:nth-child(8) {
+            left: 80%;
+            animation-duration: 15s;
+            animation-delay: 6s;
+            font-size: 18px;
+        }
+        .snowflake:nth-child(9) {
+            left: 90%;
+            animation-duration: 12s;
+            animation-delay: 4s;
+            font-size: 24px;
+        }
+
+        /* Aumentando ainda mais a quantidade de flocos de neve */
+        .snowflake:nth-child(10) {
+            left: 5%;
+            animation-duration: 13s;
+            animation-delay: 1s;
+            font-size: 19px;
+        }
+        .snowflake:nth-child(11) {
+            left: 15%;
+            animation-duration: 16s;
+            animation-delay: 2s;
+            font-size: 21px;
+        }
+        .snowflake:nth-child(12) {
+            left: 25%;
+            animation-duration: 14s;
+            animation-delay: 3s;
+            font-size: 22px;
+        }
+        .snowflake:nth-child(13) {
+            left: 35%;
+            animation-duration: 18s;
+            animation-delay: 4s;
+            font-size: 18px;
+        }
+        .snowflake:nth-child(14) {
+            left: 45%;
+            animation-duration: 11s;
+            animation-delay: 5s;
+            font-size: 25px;
+        }
+        .snowflake:nth-child(15) {
+            left: 55%;
+            animation-duration: 13s;
+            animation-delay: 2s;
+            font-size: 20px;
+        }
+        .snowflake:nth-child(16) {
+            left: 65%;
+            animation-duration: 10s;
+            animation-delay: 3s;
+            font-size: 22px;
+        }
+        .snowflake:nth-child(17) {
+            left: 75%;
+            animation-duration: 14s;
+            animation-delay: 6s;
+            font-size: 24px;
+        }
+        .snowflake:nth-child(18) {
+            left: 85%;
+            animation-duration: 17s;
+            animation-delay: 5s;
+            font-size: 19px;
+        }
+        .snowflake:nth-child(19) {
+            left: 95%;
+            animation-duration: 12s;
+            animation-delay: 1s;
+            font-size: 20px;
+        }
+
+        /* Mais flocos de neve para criar o efeito de "neve pesada" */
+        .snowflake:nth-child(20) {
+            left: 10%;
+            animation-duration: 14s;
+            animation-delay: 3s;
+            font-size: 21px;
+        }
+        .snowflake:nth-child(21) {
+            left: 20%;
+            animation-duration: 11s;
+            animation-delay: 2s;
+            font-size: 19px;
+        }
+        .snowflake:nth-child(22) {
+            left: 30%;
+            animation-duration: 18s;
+            animation-delay: 5s;
+            font-size: 20px;
+        }
+        .snowflake:nth-child(23) {
+            left: 40%;
+            animation-duration: 12s;
+            animation-delay: 6s;
+            font-size: 23px;
+        }
+        .snowflake:nth-child(24) {
+            left: 50%;
+            animation-duration: 15s;
+            animation-delay: 1s;
+            font-size: 18px;
+        }
+
+        /* Criando as estrelas no fundo */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        /* Criando um céu estrelado mais dinâmico */
+        .star:nth-child(odd) {
+            animation-duration: 2s;
+        }
+
+        .star:nth-child(even) {
+            animation-duration: 3s;
+        }
+
+        /* Gerando estrelas em posições aleatórias */
+        .star:nth-child(1) { top: 10%; left: 15%; }
+        .star:nth-child(2) { top: 5%; left: 60%; }
+        .star:nth-child(3) { top: 70%; left: 80%; }
+        .star:nth-child(4) { top: 40%; left: 25%; }
+        .star:nth-child(5) { top: 90%; left: 50%; }
+        .star:nth-child(6) { top: 30%; left: 40%; }
+        .star:nth-child(7) { top: 50%; left: 70%; }
+        .star:nth-child(8) { top: 20%; left: 90%; }
+        .star:nth-child(9) { top: 80%; left: 10%; }
+
+        /* Estilo do texto "Baixe o Delta..." em minúsculo */
+        .small-text {
+            font-size: 12px; /* Tamanho bem pequeno */
+            color: white;
+            margin-bottom: 20px;
+            text-transform: lowercase; /* Assegura que o texto esteja em minúsculo */
+        }
+
+        /* Ajuste para o rodapé */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            z-index: 2; /* Garantir que o rodapé fique visível acima do conteúdo */
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-overlay"></div> <!-- Camada de sobreposição para suavizar o fundo -->
+    <h1>Baixe o Delta pelo link de sua preferência:</h1>
+    <div class="small-text">Baixe o Delta pelo link de sua preferência:</div> <!-- Texto em minúsculo -->
+    <div class="buttons-container">
+        <a href="https://www.mediafire.com/folder/f57gcu8krqran/DELTA" class="button" target="_blank">MediaFire</a>
+        <a href="https://www.gofile.io" class="button" target="_blank">GoFile</a>
+    </div>
+
+    <!-- Flocos de neve -->
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❄</div>
+
+    <footer>
+        <p><a href="https://discord.gg/domius" target="_blank" style="color: white; font-size: 16px;">discord.gg/domius</a></p>
+    </footer>
+</body>
+</html>
