@@ -1,0 +1,1 @@
+game.Players.LocalPlayer:Kick("SCRIPT DESLIGADO by MINI HELL")
